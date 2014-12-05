@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+configurations {
+    provided
+}
+sourceSets {
+    main { compileClasspath += configurations.provided }
+}
+
+dependencies {
+	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+	
+	compile 'mysql:mysql-connector-java:5.1.34'
+	
+	provided 'javax.ejb:javax.ejb-api:3.2'
+    provided 'javax.persistence:persistence-api:1.0.2'
+}

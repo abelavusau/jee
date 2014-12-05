@@ -1,0 +1,10 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse-wtp'
+
+dependencies {
+    compile project(':persistense')
+    compile 'com.sun.faces:jsf-api:2.+'
+    compile 'javax.servlet:javax.servlet-api:3.0.1'
+    runtime 'com.sun.faces:jsf-impl:2.+'
+}
