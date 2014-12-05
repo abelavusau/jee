@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 
 import com.jee.gateways.UserGatewayLocal;
 
 @ManagedBean(name = "userBean")
-@SessionScoped
+@RequestScoped
 public class UserBean implements Serializable {
     @EJB
     private UserGatewayLocal gatewayLocal;
@@ -51,5 +51,8 @@ public class UserBean implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public void submit() {
     }
 }

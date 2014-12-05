@@ -1,2 +1,6 @@
 
-include "ear-app", "persistense", "presentation"
+include 
+"ear-app",
+"persistense",
+"presentation",
+"presentation-mediators"

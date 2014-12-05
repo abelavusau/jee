@@ -36,8 +36,8 @@ public class UserGateway implements UserGatewayLocal {
     }
 
     @Override
-    public void update() {
-        em.refresh(this.current);
+    public void update(User entity) {
+        em.merge(entity);
     }
 
     @Override
