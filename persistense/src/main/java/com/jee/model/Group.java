@@ -5,19 +5,20 @@ import javax.persistence.*;
 import java.util.Set;
 
 /**
- * The persistent class for the roles database table.
+ * The persistent class for the groups database table.
  * 
  */
 @Entity
-@Table(name = "roles")
-@NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")
-public class Role implements Serializable {
+@Table(name = "groups")
+@NamedQuery(name = "Group.findAll", query = "SELECT g FROM Group g")
+public class Group implements Serializable {
     private static final long serialVersionUID = 1L;
     private int               id;
-    private String            role;
+    private String            desc;
+    private String            name;
     private Set<User>         users;
 
-    public Role() {
+    public Group() {
     }
 
     @Id
@@ -30,16 +31,24 @@ public class Role implements Serializable {
         this.id = id;
     }
 
-    public String getRole() {
-        return this.role;
+    public String getDesc() {
+        return this.desc;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     // bi-directional many-to-many association to User
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "groups")
     public Set<User> getUsers() {
         return this.users;
     }

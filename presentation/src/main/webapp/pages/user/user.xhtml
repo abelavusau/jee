@@ -7,17 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>User</title>
 </head>
-<body>
-	<f:view>
-		<h:form>
-			<h:column>
-				<h:inputText title="User name:" value="#{userBean.username}" />
-				<h:inputSecret title="Password:" value="#{userBean.password}" />
-				<h:inputText title="First name:" value="#{userBean.firstname}" />
-				<h:inputText title="Last name:" value="#{userBean.lastname}" />
-				<h:commandButton value="Submit" action="user" />
-			</h:column>
-		</h:form>
-	</f:view>
-</body>
+<h:body>
+	<p>Welcome to user pages</p>
+	<h:form>
+		<h:commandButton action="#{authenticateBean.logout}" value="Logout" />
+	</h:form>
+</h:body>
 </html>

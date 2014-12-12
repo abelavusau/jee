@@ -41,8 +41,7 @@ public class UserPK implements Serializable {
             return false;
         }
         UserPK castOther = (UserPK) other;
-        return (this.id == castOther.id)
-                && this.username.equals(castOther.username);
+        return (this.id == castOther.id) && this.username.equals(castOther.username);
     }
 
     public int hashCode() {
