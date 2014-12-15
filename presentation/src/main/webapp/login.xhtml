@@ -13,11 +13,14 @@
 			<h:outputLabel for="j_password" value="Password" />
 			<input type="password" name="j_password" />
 
-			<h:outputText value="" />
 			<h:panelGrid columns="2">
 				<input type="submit" name="submit" value="Login" />
-				<h:button outcome="index" value="Cancel" />
+				<input type="reset" name="reset" value="Reset" />
 			</h:panelGrid>
+			
+			Do not have account?
+			
+			<h:link outcome="/register">Sign Up</h:link>
 		</h:panelGrid>
 	</form>
 </h:body>

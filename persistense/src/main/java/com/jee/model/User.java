@@ -1,7 +1,10 @@
 package com.jee.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -15,13 +18,20 @@ public class User implements Serializable {
     public static final String FIND_ALL = "User.findAll";
     private static final long serialVersionUID = 1L;
     private UserPK            id;
-    private byte              enabled;
     private String            firstname;
     private String            lastname;
     private String            password;
     private Set<Group>        groups;
 
     public User() {
+    }
+
+    public User(UserPK id, String firstname, String lastname, String password) {
+        super();
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.password = password;
     }
 
     @EmbeddedId
@@ -31,14 +41,6 @@ public class User implements Serializable {
 
     public void setId(UserPK id) {
         this.id = id;
-    }
-
-    public byte getEnabled() {
-        return this.enabled;
-    }
-
-    public void setEnabled(byte enabled) {
-        this.enabled = enabled;
     }
 
     public String getFirstname() {
@@ -67,10 +69,21 @@ public class User implements Serializable {
 
     // bi-directional many-to-many association to Group
     @ManyToMany
-    @JoinTable(name = "users_groups", joinColumns = {
-            @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            @JoinColumn(name = "user_id", referencedColumnName = "username"), }, inverseJoinColumns = { @JoinColumn(name = "group_id") })
+    @JoinTable(
+        name = "users_groups",
+        joinColumns = {
+                @JoinColumn(name = "user_id", referencedColumnName = "id"),
+                @JoinColumn(name = "user_id", referencedColumnName = "username", insertable = false)
+        },
+        inverseJoinColumns = {
+                @JoinColumn(name = "group_id", referencedColumnName = "id")
+        }
+    )
     public Set<Group> getGroups() {
+        if (this.groups == null) {
+            this.groups = new HashSet<Group>();
+        }
+        
         return this.groups;
     }
 

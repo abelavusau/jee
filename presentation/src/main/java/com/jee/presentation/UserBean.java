@@ -7,12 +7,16 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import com.jee.gateways.UserGatewayLocal;
+import com.jee.model.Group;
+import com.jee.model.User;
+import com.jee.model.UserPK;
+import com.jee.presentation.util.HashPasswordGenerator;
 
 @ManagedBean(name = "userBean")
 @RequestScoped
 public class UserBean implements Serializable {
     @EJB
-    private UserGatewayLocal gatewayLocal;
+    private UserGatewayLocal  gatewayLocal;
 
     private static final long serialVersionUID = 1L;
 
@@ -52,7 +56,10 @@ public class UserBean implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public void submit() {
+        User user = new User(new UserPK(username), firstname, lastname, HashPasswordGenerator.generateHash(password));
+        user.getGroups().add(new Group(1));
+        gatewayLocal.create(user);
     }
 }

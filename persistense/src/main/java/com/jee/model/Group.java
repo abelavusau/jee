@@ -1,8 +1,15 @@
 package com.jee.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * The persistent class for the groups database table.
@@ -19,6 +26,11 @@ public class Group implements Serializable {
     private Set<User>         users;
 
     public Group() {
+    }
+
+    public Group(int id) {
+        super();
+        this.id = id;
     }
 
     @Id

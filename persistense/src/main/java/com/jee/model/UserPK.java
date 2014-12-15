@@ -1,6 +1,7 @@
 package com.jee.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 /**
@@ -15,6 +16,11 @@ public class UserPK implements Serializable {
     private String            username;
 
     public UserPK() {
+    }
+    
+    public UserPK(String username) {
+        super();
+        this.username = username;
     }
 
     public int getId() {
