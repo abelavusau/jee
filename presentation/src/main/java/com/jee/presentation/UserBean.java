@@ -9,7 +9,6 @@ import javax.faces.bean.RequestScoped;
 import com.jee.gateways.UserGatewayLocal;
 import com.jee.model.Group;
 import com.jee.model.User;
-import com.jee.model.UserPK;
 import com.jee.presentation.util.HashPasswordGenerator;
 
 @ManagedBean(name = "userBean")
@@ -58,7 +57,7 @@ public class UserBean implements Serializable {
     }
 
     public void submit() {
-        User user = new User(new UserPK(username), firstname, lastname, HashPasswordGenerator.generateHash(password));
+        User user = new User(username, firstname, lastname, HashPasswordGenerator.generateHash(password));
         user.getGroups().add(new Group(1));
         gatewayLocal.create(user);
     }

@@ -4,6 +4,5 @@
 	   <jta-data-source>jdbc/PlatformDS</jta-data-source>
 	   <class>com.jee.model.Group</class>
 	   <class>com.jee.model.User</class>
-	   <class>com.jee.model.UserPK</class>
 	</persistence-unit>
 </persistence>

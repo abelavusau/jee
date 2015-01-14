@@ -12,12 +12,16 @@ import java.util.Set;
  * 
  */
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "id"),
+        @UniqueConstraint(columnNames = "username")
+})
 @NamedQuery(name = User.FIND_ALL, query = "SELECT u FROM User u")
 public class User implements Serializable {
     public static final String FIND_ALL = "User.findAll";
     private static final long serialVersionUID = 1L;
-    private UserPK            id;
+    private int               id;
+    private String            username;
     private String            firstname;
     private String            lastname;
     private String            password;
@@ -26,21 +30,30 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(UserPK id, String firstname, String lastname, String password) {
+    public User(String username, String firstname, String lastname, String password) {
         super();
-        this.id = id;
+        this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
         this.password = password;
     }
 
-    @EmbeddedId
-    public UserPK getId() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public int getId() {
         return this.id;
     }
 
-    public void setId(UserPK id) {
+    public void setId(int id) {
         this.id = id;
+    }
+    
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstname() {
@@ -72,8 +85,7 @@ public class User implements Serializable {
     @JoinTable(
         name = "users_groups",
         joinColumns = {
-                @JoinColumn(name = "user_id", referencedColumnName = "id"),
-                @JoinColumn(name = "user_id", referencedColumnName = "username", insertable = false)
+                @JoinColumn(name = "user_id", referencedColumnName = "id")
         },
         inverseJoinColumns = {
                 @JoinColumn(name = "group_id", referencedColumnName = "id")

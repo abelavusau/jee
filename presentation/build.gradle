@@ -6,5 +6,6 @@ dependencies {
     compile project(':persistense')
     compile 'com.sun.faces:jsf-api:2.+'
     compile 'javax.servlet:javax.servlet-api:3.0.1'
+    compile 'com.google.guava:guava:11.0.2'
     runtime 'com.sun.faces:jsf-impl:2.+'
 }

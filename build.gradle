@@ -3,7 +3,8 @@ subprojects {
     apply plugin: 'eclipse'
 
     repositories {
-       mavenCentral()
+        mavenLocal()
+        mavenCentral()
     }
 
     dependencies {
@@ -15,5 +16,11 @@ subprojects {
 
     jar {
         manifest.attributes provider: 'my cool company'
+    }
+    
+    eclipse {
+	    classpath {
+	       downloadSources=true
+	    }
     }
 }
