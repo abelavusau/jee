@@ -1,12 +1,8 @@
 package com.jee.model;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -18,9 +14,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "groups")
 @NamedQuery(name = "Group.findAll", query = "SELECT g FROM Group g")
-public class Group implements Serializable {
+public class Group extends DomainObject {
     private static final long serialVersionUID = 1L;
-    private int               id;
     private String            desc;
     private String            name;
     private Set<User>         users;
@@ -28,19 +23,9 @@ public class Group implements Serializable {
     public Group() {
     }
 
-    public Group(int id) {
+    public Group(long id) {
         super();
-        this.id = id;
-    }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.setId(id);
     }
 
     public String getDesc() {

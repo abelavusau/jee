@@ -58,7 +58,11 @@ public class UserBean implements Serializable {
 
     public void submit() {
         User user = new User(username, firstname, lastname, HashPasswordGenerator.generateHash(password));
-        user.getGroups().add(new Group(1));
+        user.getGroups().add(new Group(1L));
         gatewayLocal.create(user);
+        
+        firstname = null;
+        lastname = null;
+        username = null;
     }
 }

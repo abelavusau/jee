@@ -1,11 +1,15 @@
 package com.jee.model;
 
-import java.io.Serializable;
-
-import javax.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * The persistent class for the users database table.
@@ -17,10 +21,9 @@ import java.util.Set;
         @UniqueConstraint(columnNames = "username")
 })
 @NamedQuery(name = User.FIND_ALL, query = "SELECT u FROM User u")
-public class User implements Serializable {
+public class User extends DomainObject {
     public static final String FIND_ALL = "User.findAll";
     private static final long serialVersionUID = 1L;
-    private int               id;
     private String            username;
     private String            firstname;
     private String            lastname;
@@ -38,16 +41,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    
     public String getUsername() {
         return username;
     }
