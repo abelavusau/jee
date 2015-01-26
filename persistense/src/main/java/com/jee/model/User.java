@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -16,19 +17,17 @@ import javax.persistence.UniqueConstraint;
  * 
  */
 @Entity
-@Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "id"),
-        @UniqueConstraint(columnNames = "username")
-})
+@Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = "id"), @UniqueConstraint(columnNames = "username") })
 @NamedQuery(name = User.FIND_ALL, query = "SELECT u FROM User u")
 public class User extends DomainObject {
-    public static final String FIND_ALL = "User.findAll";
-    private static final long serialVersionUID = 1L;
-    private String            username;
-    private String            firstname;
-    private String            lastname;
-    private String            password;
-    private Set<Group>        groups;
+    public static final String FIND_ALL         = "User.findAll";
+    private static final long  serialVersionUID = 1L;
+    private String             username;
+    private String             firstname;
+    private String             lastname;
+    private String             password;
+    private Set<Group>         groups;
+    private Set<Bill>          bills;
 
     public User() {
     }
@@ -75,20 +74,12 @@ public class User extends DomainObject {
 
     // bi-directional many-to-many association to Group
     @ManyToMany
-    @JoinTable(
-        name = "users_groups",
-        joinColumns = {
-                @JoinColumn(name = "user_id", referencedColumnName = "id")
-        },
-        inverseJoinColumns = {
-                @JoinColumn(name = "group_id", referencedColumnName = "id")
-        }
-    )
+    @JoinTable(name = "users_groups", joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "group_id", referencedColumnName = "id") })
     public Set<Group> getGroups() {
         if (this.groups == null) {
             this.groups = new HashSet<Group>();
         }
-        
+
         return this.groups;
     }
 
@@ -96,4 +87,12 @@ public class User extends DomainObject {
         this.groups = groups;
     }
 
+    @OneToMany(orphanRemoval = true, mappedBy = "user")
+    public Set<Bill> getBills() {
+        return bills;
+    }
+
+    public void setBills(Set<Bill> bills) {
+        this.bills = bills;
+    }
 }
